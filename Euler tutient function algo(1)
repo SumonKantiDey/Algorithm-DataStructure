@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MAXX 1000005
+unsigned long long phi[MAXX];
+int main()
+{
+    memset(phi,0,sizeof(phi));
+    phi[1]=1;
+    unsigned long long a,b,i;
+    for(i=2;i<MAXX;i++){
+        if(!phi[i]==1){
+            phi[i]=i-1;
+            for(int j=i*2;j<MAXX;j+=i){
+                if(!phi[j]==1){
+                    phi[j]=j;
+                }
+                 phi[j] -= (phi[j]/i);
+             }
+         }
+      }
+    int TEST;
+    scanf("%d",&TEST);
+    while(TEST--){
+        scanf("%llu",&a);
+        printf("%llu\n",phi[a]);
+    }
+    return 0;
+
+}
