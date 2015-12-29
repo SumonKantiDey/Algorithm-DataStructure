@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 1000000000
+bool prime[MAX+3]={0};
+int sqrt1=sqrt(MAX);
+int sqrt2=sqrt(sqrt1);
+void seive(){
+     prime[0]=1;
+    prime[1]=1;
+for(int i=2;i<=sqrt2;i++){
+    if(prime[i]==0){
+        for(int j=i*i;j<=sqrt1;j+=i)
+            prime[j]=1;
+    }
+}
+}
+void segmentseive(int  a,int b){
+    for(int i=a;i<=b;i++){
+        if(prime[i]==0){
+               // cout<<"i="<<i<<endl;
+            for(int j=2; j*j<=i;j++){
+                if(prime[j]==0){
+                    //   cout<<"j="<<j<<endl;
+                    if(i%j==0){
+                        prime[i]=1;
+               // cout<<"i====="<<i<<endl;
+                        break;
+                    }
+              }
+            }
+        }
+    }
+
+
+}
+int main()
+{
+    seive();
+    int tc;
+    cin >>tc;
+    long long fir,sec;
+    while(tc--){
+        cin >>fir>>sec;
+  if(sec>sqrt2){//(sec>sqrt1)dekleo kaj hobe
+    segmentseive(fir,sec);
+    }
+   for(int i=fir;i<=sec;i++){
+     if(prime[i]==0){
+        printf("%d\n",i);
+     }
+  }
+  printf("\n");
+  }
+
+    return 0;
+}
