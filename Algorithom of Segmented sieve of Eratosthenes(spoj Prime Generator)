@@ -38,7 +38,7 @@ int main()
     seive();
     int tc;
     cin >>tc;
-    long long fir,sec;
+    int fir,sec;
     while(tc--){
         cin >>fir>>sec;
   if(sec>sqrt2){//(sec>sqrt1)dekleo kaj hobe
