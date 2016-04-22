@@ -1,0 +1,42 @@
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define sz 1000000007
+#define ll long long
+int prime[50847535];
+ll a[sz/64+100];
+int  cnt;
+void seive()//1 indexed
+{
+    for (long long i = 3; i <= sqrt(sz); i += 2) {
+		if(!(a[i/64]&(1LL<<(i%64)))) {
+			for(long long j = i * i; j <= sz; j += 2 * i) {
+				a[j/64] |= (1LL<<(j%64));
+			}
+		}
+	}
+
+	prime[cnt++] = 2;
+	for (long long i = 3; i <= sz; i += 2) {
+		if(!(a[i / 64] & (1LL << (i % 64)))) {
+			prime[cnt++] = i;
+
+		}
+
+	}
+
+	//return 0;
+}
+
+int main()
+{
+      seive();
+      cout<<"total prime num ace = "<<cnt<<endl;
+    for(int i=0; i<100; i++){
+      cout<<prime[i]<<endl;
+    }
+    return 0;
+}
+
+
