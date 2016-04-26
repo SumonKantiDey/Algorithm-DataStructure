@@ -1,0 +1,28 @@
+//lightoj 1023 discovering permutations 
+   #include<bits/stdc++.h>
+    using namespace std;
+
+    int main () {
+      char myints[30];
+        int i,t,p=0;
+        cin>>t;
+        while(t--){
+        int n,m,b=0;
+        cin>>n>>m;
+        for(i=0; i<n; i++){
+            myints[i]=i+'A';
+        }
+        myints[i]='\0';
+        printf("Case %d:\n",++p);
+      do {
+       for(int i=0; i<n; i++){
+        cout<<myints[i];
+       }
+       b++;
+       cout<<endl;
+      } while ( std::next_permutation(myints,myints+n) && b<m );
+     // cout<<endl;
+        }
+
+      return 0;
+    }
