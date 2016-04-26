@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mx 1000
+void multiply(char a[],char b[],char res[])
+{
+    int i,j,k,carry,ans;
+     if( strcmp(b,"1") == 0)
+    {
+        strcpy(res,a);
+        return ;
+    }
+    if(strcmp(a,"0") == 0 || strcmp(b,"0") == 0)
+    {
+        strcpy(res,"0");
+        return ;
+    }
+    int len1 = strlen(a);
+    int len2 = strlen(b);
+    memset(res,'0',sizeof(res));
+    int index = -1;
+    for(i = len2-1; i>=0; i--){
+            index++;
+            carry=0;
+        for(j = len1-1, k = index; j>=0; j--, k++){
+            ans = (a[j] - '0') * (b[i] - '0') + (res[k] - '0') + carry;
+            cout<<"ans===  "<<ans<<"   carry==="<<carry;
+            printf("  res[%d]==%d\n",k,res[k]-'0');
+            carry = ans/10;
+            cout<<"Next carry===  "<<carry<<endl;
+            res[k] = (ans % 10)+'0';
+            printf("updated res[%d]==%d \n",k,res[k]-'0');
+        }
+         res[k] = (carry % 10)+'0';
+         cout<<"after inner loop:=="<<endl<<endl;
+         printf("left res[%d]==%d \n",k,res[k]-'0');
+    }
+    cout<<"if remain carry===  "<<carry<<"    k==="<<k<<endl;
+    /* amder carry na takle ai nicer if dor kar nei
+    karon oi somoy extra index dorkar nai  99*23=2277
+    aikane 4 ta index dorkar hocce so k++ kore res[k]='\0'
+    bosate hobe carry natake tar dorkar hoto na*/
+    if(carry != 0){
+        k++;
+    }
+    res[k] = '\0';
+    reverse(res,res+k);
+    /* jeheto amara reverly hesab korci so amader
+      reverse kore ans likte hobe*/
+}
+int main()
+{
+    char a[mx],b[mx],res[mx];
+    int n;
+    cin>>n;
+    while(n--){
+    cin>>a>>b;
+        multiply(a,b,res);
+        printf("%s\n",res);
+    }
+    return 0;
+}
