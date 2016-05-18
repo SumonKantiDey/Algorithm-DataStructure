@@ -1,4 +1,5 @@
 //http://www.shafaetsplanet.com/planetcoding/?p=1557
+//description 2 no khata
 #include<bits/stdc++.h>
 using namespace std;
 #define mx 100001
