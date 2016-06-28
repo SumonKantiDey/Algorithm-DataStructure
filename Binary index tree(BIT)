@@ -1,0 +1,92 @@
+//ref https://www.youtube.com/watch?v=CWDQJGaN1gY
+#include<bits/stdc++.h>
+using namespace std;
+int BIT[1000], a[1000];
+void update(int n,int x, int val)//get next node
+{
+        while(x <= n)
+      {
+          BIT[x] += val;
+          x += x & (-x);
+      }
+
+}
+int query(int x)//get parent node
+{
+     int sum = 0;
+    while(x > 0)
+    {
+        sum += BIT[x];
+        x -= x & (-x);
+    }
+     return sum;
+}
+
+int main()
+{
+     int n,num,indexa,val,querya,q1,q2;
+     scanf("%d", &n);
+     for(int i = 1; i <= n; i++)
+     {
+           scanf("%d", &a[i]);
+           update(n,i, a[i]);
+     }
+     cout<<"Build up tree is: "<<endl;
+     for(int i=1; i<=n; i++)
+     {
+         cout<<BIT[i]<<"  ";
+     }
+     cout<<endl<<endl;
+      cout<<"How many times you updated only one index at a time "<<endl;
+      cin>>num;
+      while(num--)
+      {
+          cout<<"Insert updated index with value :"<<endl;
+          cin>>indexa>>val;
+          update(n,indexa+1, val);
+          cout<<"Update  tree is: "<<endl;
+          for(int i=1; i<=n; i++)
+          {
+          cout<<BIT[i]<<"  ";
+          }
+          cout<<endl<<endl;
+      }
+      cout<<"How many times you query : "<<endl;
+      cin>>querya;
+      while(querya--){
+          cout<<"Insert two query range :"<<endl;
+          cin>>q1>>q2;
+          printf("sum of all elements between %d and %d in range is %d\n",q1,q2,(query(q2+1) - query(q1)));
+      }
+            printf("sum of first 10 elements is %d\n", query(10));
+     return 0;
+}
+/**
+input output:
+10
+1 2 3 4 5 6 7 8 9 10
+Build up tree is:
+1  3  3  10  5  11  7  36  9  19
+
+How many times you updated only one index at a time
+2
+Insert updated index with value :
+2 3
+First update  tree is:
+1  3  6  13  5  11  7  39  9  19
+
+Insert updated index with value :
+3 2
+second update  tree is:
+1  3  6  15  5  11  7  41  9  19
+
+How many times you query :
+2
+Insert two query range :
+1 1
+sum of all elements between 1 and 1 in range is 2
+Insert two query range :
+1 3
+sum of all elements between 1 and 3 in range is 14
+sum of first 10 elements is 60
+**/
