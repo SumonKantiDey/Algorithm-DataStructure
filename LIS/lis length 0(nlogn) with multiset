@@ -1,0 +1,55 @@
+// duplicate value allowed
+//Time complexity 0(n(log(n))...
+#include<bits/stdc++.h>
+using namespace std;
+
+const int NX = 1000;
+int input[ NX + 5] , n ;
+void LIS_with_multiset()
+{
+    multiset < int > lis ;
+    multiset < int > :: iterator  it ;
+    scanf("%d",&n);
+    for( int i = 0 ; i < n ; i++ )
+    {
+        scanf("%d",&input[i]);
+        lis.insert( input[i]);
+        it = lis.upper_bound( input[i]);
+        if( it != lis.end()) lis.erase(it);
+    }
+     cout <<"longest length of the sequence : "<< lis.size() << endl ;
+    cout<<"The sequence are : "<<endl;
+    for (it=lis.begin(); it!=lis.end(); ++it){
+         cout<< *it<<" ";//aitar madomme value print hobe
+       }
+       cout<<endl;
+}
+int main()
+{
+    int n;
+    cout<<"Test case : "<<endl;
+    cin>>n;
+    while(n--){
+    LIS_with_multiset();
+    }
+}
+/**
+input output :
+Test case :
+3
+4
+1 1 1 1
+longest length of the sequence : 4
+The sequence are :
+1 1 1 1
+4
+4 1 1 2
+longest length of the sequence : 3
+The sequence are :
+1 1 2
+7
+3 4 -1 0 6 2 3
+longest length of the sequence : 4
+The sequence are :
+-1 0 2 3
+**/
