@@ -1,0 +1,107 @@
+//ref https://www.youtube.com/watch?v=sFVxsglODoo&index=15&list=PL2_aWCzGMAwI3W_JlcBbtYTwiQSsOTa6P
+#include<bits/stdc++.h>
+using namespace std;
+#define mx_size 101
+int ara[mx_size];
+int top = -1;
+//Push operation to insert an element on top of stack
+void Push(int x){
+ if(top == mx_size){
+    cout<<"Error : Stack overflow "<<endl;
+    return;
+ }
+ ara[++top] = x;
+}
+/////Top operation to return at top value of stack
+//int Top()
+//{
+//    return ara[top];
+//}
+
+///Pop operation to remove an element from of the Stack
+void Pop(){
+   if(top == -1){
+    cout<<"Error : No element to pop "<<endl;
+    return;
+   }
+   top--;
+}
+//This function show me Stack is Empty or not return 0 or 1
+int IsEmpty(){
+   if(top == -1)return 1;
+    return 0;
+
+}
+///Print all the element of stack
+void Print()
+{
+    cout<<"Stack :";
+    for(int i=0; i<=top; i++){
+        cout<<" "<<ara[i];}
+        cout<<endl;
+}
+
+int main()
+{
+    string s;
+    int n,num,item;
+    cout<<"Stack operation time : ";
+    cin>>n;
+    for(int i=0; i<n; i++){
+        cout<<"What's you want : ";
+        cin>>s;
+       if(s == "push"){
+        cout<<"push value   : ";
+        cin>>num;
+        Push(num);
+        Print();
+       }
+       else{
+        int Empty = IsEmpty();
+        if(Empty == 1){
+            cout<<"No element in the Stack :"<<endl;
+        }
+        else{
+        Pop();
+         cout<<"popped element is : "<<ara[top+1]<<endl;//top + 1 because top is decrease in pop function
+          Print();
+       }
+       }
+    }
+  return 0;
+}
+/**
+Input Output  :
+
+Stack operation time : 10
+What's you want : push
+push value   : 10
+Stack : 10
+What's you want : push
+push value   : 20
+Stack : 10 20
+What's you want : pop
+popped element is : 20
+Stack : 10
+What's you want : push
+push value   : 30
+Stack : 10 30
+What's you want : push
+push value   : 50
+Stack : 10 30 50
+What's you want : pop
+popped element is : 50
+Stack : 10 30
+What's you want : pop
+popped element is : 30
+Stack : 10
+What's you want : pop
+popped element is : 10
+Stack :
+What's you want : pop
+No element in the Stack :
+What's you want : push
+push value   : 100
+Stack : 100
+**/
+
