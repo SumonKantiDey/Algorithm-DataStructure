@@ -1,0 +1,30 @@
+///Reff https://www.youtube.com/watch?v=hNP72JdOIgY&list=PL2_aWCzGMAwI3W_JlcBbtYTwiQSsOTa6P&index=17
+///Time complexity is  0(n) for push Space complexity is 0(1)
+#include<bits/stdc++.h>
+using namespace std;
+void Reverse(char str[],int n)///(char *str,int n)
+{
+    stack<char>s;
+    int i=0;
+    int j = strlen(str)-1;
+    ///Loop for Push in Stack
+    while(i<j){
+        swap(str[i],str[j]);
+        i++;
+        j--;
+    }
+}
+int main()
+{
+    char str[51];
+    cout<<"Enter a String :"<<endl;
+    gets(str);
+    Reverse(str,strlen(str));
+    cout<<"Reverse order : "<<str<<endl;
+}
+/**
+Input output :
+Enter a String :
+Awishy Das Tushy
+Reverse order : yhsuT saD yhsiwA
+**/
