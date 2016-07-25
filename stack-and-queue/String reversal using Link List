@@ -1,0 +1,43 @@
+//reff https://www.youtube.com/watch?v=hNP72JdOIgY&list=PL2_aWCzGMAwI3W_JlcBbtYTwiQSsOTa6P&index=17
+#include<bits/stdc++.h>
+using namespace std;
+struct node{
+   int data;
+   node* next;
+};
+node* top = NULL;
+void push(char c)
+{
+    node *temp = new node();
+    if(temp == NULL){
+        cout<<"Can not creat node"<<endl;
+        return;
+    }
+    temp->data = c;
+    temp->next = top;
+    top = temp;
+
+}
+char pop()
+{
+    if(top == NULL)return 0;
+    char c = top->data;
+    node *temp = top;
+    top = top->next;
+    free(temp);
+    return c;
+}
+void Reverse(char *str,int n) ///(char str[],int n)
+{
+  for(int i=0; i<n; i++) push(str[i]);
+  for(int i=0; i<n; i++) str[i] = pop();
+}
+
+int main()
+{
+    char str[100];
+    cout<<"Enter a String :";
+    gets(str);
+    Reverse(str,strlen(str));
+    cout<<"Reverse String Is : "<<str<<endl;
+}
