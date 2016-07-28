@@ -1,0 +1,165 @@
+#include<bits/stdc++.h>
+using namespace std;
+///------ Declare a Node-------///
+ struct node{
+    int data;
+    node* next;
+ };
+ node *head = NULL,*tail,*p,*q,*store;
+ ///----- Insert at begin------////
+ void inb()
+ {
+     int a;
+     cout<<"Enter The Data To Be Inserted :";
+     cin>>a;
+     node *temp = new node;
+     temp->data = a;
+     temp->next = head;
+     head = temp;
+ }
+ ///------ Insert at Nth Position----////
+ void inm()
+{
+    int a,x,k=1;
+     cout<<"Enter The Data To Be Inserted :";
+     cin>>a;
+     cout<<"Enter the Position Where You Want To Be Inserted :  "<<endl;
+    cin>>x;
+    node *temp = new node;
+    if(x == 1){
+        temp->data = a;
+        temp->next = head;
+        head = temp;
+    }
+    else{
+       temp->data = a;
+       p = head;
+       while(k++ != x){
+        q = p;
+        p = p->next;
+       }
+       temp->next = q->next;
+       q->next = temp;
+    }
+
+}
+///-----Insert At End-----/////
+void ine()
+{
+    int a;
+    cout<<"Enter The Data To Be Inserted :";
+    cin>>a;
+    if(head == NULL){
+        head = new node();
+        head->data = a;
+        head->next = NULL;
+        return;
+    }
+    node *temp = new node();
+    temp->data = a;
+    temp->next = NULL;
+    p = head;
+    while(p->next != NULL){
+        p = p->next;
+    }
+    p->next = temp;
+}
+///------Delate At Begin----////
+void delb()
+{
+     if(head == NULL){
+    cout<<"Insert Node Please"<<endl;
+    return ;
+     }
+    store = head;
+    head = head->next;
+    cout<<"The deleted Node Is : "<<store->data<<endl;
+    delete store;
+}
+///------Delate At Mid-----////
+void delm()
+{
+     if(head == NULL){
+    cout<<"Insert Node Please"<<endl;
+    return ;
+   }
+    int del,k=1;
+   cout<<"Enter The position Where you want To be data deleted : ";
+   cin>>del;
+   p = head;
+   while(k++ != del){
+    q = p;
+    p = p->next;
+   }
+   cout<<"The Delete Node Is :"<<p->data<<endl;
+   q->next = p->next;
+   delete p;
+}
+///-----Delate at End-----///
+void dele()
+{
+     if(head == NULL){
+    cout<<"Insert Node Please"<<endl;
+    return ;
+     }
+    p = head;
+    while(p->next != NULL)
+    {
+        q = p;
+        p = p->next;
+    }
+    q->next = NULL;
+    cout<<"The Delete Node Is : "<<p->data<<endl;
+    delete p;
+}
+///-----Display-----////
+void dis()
+{
+    p = head;
+    while(p != NULL)
+    {
+        cout<<"->"<<p->data;
+        p = p->next;
+    }
+    cout<<endl;
+}
+
+int main()
+{
+    int ch;
+    char m='k',l;
+    while(m == 'k')
+     {
+         cout<<"Enter Your Choice : "<<endl;
+         cout<<"1.Insert at beginning"<<endl;
+         cout<<"2.Insert at desired position"<<endl;
+         cout<<"3.Insert at end"<<endl;
+         cout<<"4.Delete at beginning"<<endl;
+         cout<<"5.Delete at desired position"<<endl;
+         cout<<"6.Delete at end"<<endl;
+         cout<<"7.Display"<<endl;
+         cout<<"8.Exit"<<endl;
+         cin>>ch;
+    switch(ch)
+    {
+    case 1: inb();
+    break;
+    case 2: inm();
+    break;
+    case 3: ine();
+    break;
+    case 4: delb();
+    break;
+    case 5: delm();
+    break;
+    case 6: dele();
+    break;
+    case 7: dis();
+    break;
+    case 8: m='n';
+    break;
+    default:cout<<"Invalid choice"<<endl;;
+    }
+    }
+    return 0;
+    }
