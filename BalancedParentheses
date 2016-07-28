@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool Arepair(char open,char close)
+{
+    if(open == '(' && close == ')')return true;
+    if(open == '{' && close == '}')return true;
+    if(open == '[' && close == ']')return true;
+    return false;
+}
+bool solve(string exp)
+{
+    stack<char>ss;
+    for(int i=0; i<exp.size(); i++){
+        if(exp[i] == '(' || exp[i] == '{' || exp[i] == '[')
+            ss.push(exp[i]);
+        else if(exp[i] == ')' || exp[i] == '}' || exp[i] == ']')
+        {
+            //cout<<Arepair(ss.top(),exp[i])<<endl;
+            if(ss.empty()!=0  || Arepair(ss.top(),exp[i]) == false)return false;
+            else ss.pop();
+        }
+    }
+    return ss.empty() ? true:false;
+}
+int main()
+{
+    string expression;
+    cout<<"Enter a Expression : "<<endl;
+    cin>>expression;
+    if(solve(expression))cout<<"Balenced"<<endl;
+    else cout<<"Not Balenced"<<endl;
+}
+/**
+Input Output
+Enter a Expression :
+   )]{]
+Not Balenced
+
+Enter a Expression :
+[](){}
+Balenced
+**/
