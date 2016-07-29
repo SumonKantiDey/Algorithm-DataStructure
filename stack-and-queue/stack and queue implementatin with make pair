@@ -1,0 +1,47 @@
+//ref file:///C:/Users/Sumon/Downloads/c++%20-%20Is%20it%20possible%20to%20access%20a%20member%
+//20variable%20of%20a%20pair%20from%20queue%20member%20function%20directly%20%20-%20Stack%20Overflow.htm
+#include<bits/stdc++.h>
+using namespace std;
+/**
+int  main()
+{
+    queue<pair<int,int> >q;
+    q.push(make_pair(2,0));
+    q.push(make_pair(2,1));
+    q.push(make_pair(2,90));
+    pair<int,int> tmp;
+    while(!q.empty()){
+    tmp = q.front();
+    cout<<tmp.first<<"  "<<tmp.second<<endl;
+    q.pop();
+    }
+  return 0;
+ }
+output:
+2  0
+2  1
+2  90
+**/
+
+/**
+int  main()
+{
+    stack<pair<int,int> >s;
+    s.push(make_pair(2,0));
+    s.push(make_pair(2,1));
+    s.push(make_pair(2,90));
+    cout<<"Stack size is  = "<<s.size()<<endl;
+    pair<int,int> tmp;
+    while(!s.empty()){
+    tmp = s.top();
+    cout<<tmp.first<<"  "<<tmp.second<<endl;
+    s.pop();
+    }
+  return 0;
+ }
+output:
+Stack size is  = 3
+2  90
+2  1
+2  0
+**/
