@@ -1,0 +1,24 @@
+//prob http://codeforces.com/problemset/problem/450/A
+#include<bits/stdc++.h>
+using namespace std;
+pair<int,int>pa;
+int main()
+{
+    queue<pair<int,int> >q;
+    int n,val,del,last;
+    cin>>n>>del;
+    for(int i=1; i<=n; i++){
+            cin>>val;
+        q.push(make_pair(i,val));
+    }
+    while(!q.empty())
+    {
+        pa = q.front();q.pop();
+        last = pa.first;
+        pa.second -= del;
+        if(pa.second > 0)q.push(pa);
+
+    }
+    cout<<last<<endl;
+    return 0;
+}
