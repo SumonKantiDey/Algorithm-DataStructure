@@ -1,0 +1,91 @@
+///ref https://www.youtube.com/watch?v=okr-XE8yTO8&index=23&list=PL2_aWCzGMAwI3W_JlcBbtYTwiQSsOTa6P
+#include<bits/stdc++.h>
+using namespace std;
+#define mx 101
+int ara[mx];
+int fronta = -1,rear = -1;
+///Check queue is empty or not
+bool IsEmpty()
+{
+    if(fronta == -1 && rear == -1)return true;
+    else return false;
+}
+///Check queue is full or not
+bool IsFull()
+{
+    if((rear+1) % mx == fronta )return true;//suppose when mx=5 ans rear = 4 that time
+                                            //fronta = 1 and starting index 0
+    else return false;
+}
+/// Returns element at front of queue.
+int Front()
+{
+    if(fronta == -1){
+       cout<<"Error: cannot return front from empty queue\n";
+        return -1;
+    }
+     cout<<"poping element :   "<<ara[fronta-1]<<endl;
+    return ara[fronta];
+}
+///Push the value in the queue
+void Enqueue(int x)
+{
+    cout<<"Enqueing "<<x<<endl;
+    if(IsFull())
+    {
+        cout<<"Error : queue is full "<<endl;
+        return;
+    }
+    if(IsEmpty()){
+        fronta = rear = 0;
+    }
+    else {
+        rear = (rear+1)%mx;
+    }
+    ara[rear] = x;
+}
+///Pop the from queue
+void Dequeue()
+{
+    cout<<"Dequeing "<<endl;
+    if(IsEmpty())
+    {
+        cout<<"Error: Queue is Empty\n";
+         return;
+    }
+    else if(fronta == rear){
+        fronta = rear = -1;
+    }
+    else {
+        fronta = (fronta+1)%mx;
+    }
+    Front();
+}
+///Print the element
+void Print()
+{
+    ///Finding number of element
+    int cnt = (rear + mx -fronta)%mx + 1;
+    cout<<"Queue   :";
+    for(int i=0; i<cnt; i++){
+        int index = (fronta + i)%mx;// Index of element while travesing circularly from front
+         cout<<ara[index]<<" ";
+    }
+    cout<<endl<<endl;
+}
+int main()
+{
+   Enqueue(2);  Print();
+   Enqueue(4);  Print();
+   Enqueue(6);  Print();
+   Dequeue();	Print();
+   Enqueue(8);  Print();
+   Dequeue();	Print();
+   Dequeue();	Print();
+   Dequeue();	Print();
+   Dequeue();	Print();
+   Dequeue();	Print();
+   Enqueue(8);  Print();
+   Dequeue();	Print();
+   return 0;
+}
