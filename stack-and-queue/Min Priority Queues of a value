@@ -1,0 +1,37 @@
+/**
+Min Priority Queues of a value
+template < class T,
+           class Container = vector<T>,
+           class Compare = less<typename Container::value_type>
+         >
+class priority_queue;
+**/
+//ref http://www.technical-recipes.com/2011/priority-queues-and-min-priority-queues-in-c/
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef pair< int, int > pii;
+priority_queue< int,vector< int >, greater< int > > v;///here greater<int> work like comparator
+int main()
+{
+    int n,m,a,b;
+    for(int i=1; i<=5; i++){
+        cin>>a;
+        v.push(a);
+    }
+      while(!v.empty()){
+      cout<<v.top()<<endl;
+      v.pop();
+    }
+    cout<<endl;
+
+}
+/**
+input: 5 10 3 15 1
+output:
+1
+3
+5
+10
+15
+**/
