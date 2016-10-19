@@ -1,0 +1,43 @@
+/**
+Min Priority Queues of pair it can sort pair first value incresing order
+template < class T,
+           class Container = vector<T>,
+           class Compare = less<typename Container::value_type>
+         >
+class priority_queue;
+**/
+//ref http://www.technical-recipes.com/2011/priority-queues-and-min-priority-queues-in-c/
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef pair< int, int > pii;
+ priority_queue< pii,vector< pii >, greater< pii > > v;
+int main()
+{
+    int n,m,a,b;
+    for(int i=1; i<=5; i++){
+        cin>>a>>b;
+        v.push(make_pair(a,b));
+    }
+      while(!v.empty()){
+        pii a = v.top();
+    cout<<a.first<<" "<<a.second<<endl;
+       v.pop();
+    }
+    cout<<endl;
+
+}
+/**
+intput:
+5 17
+6 32
+7 15
+8 25
+12 27
+output:
+5 17
+6 32
+7 15
+8 25
+12 27
+**/
