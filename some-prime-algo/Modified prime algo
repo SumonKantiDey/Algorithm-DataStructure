@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define SIZE 100005///10^9 can solve here
+int sob[SIZE], s = 0;
+bool prime[SIZE];
+void SEIEVE()
+{
+    long long unsigned i, j, lim = SIZE;
+    for(i=2; i<=lim; i++)
+    {
+        if(prime[i]==0)
+        {
+            sob[s++] = i;
+            for(j=i*i; j<SIZE; j+=i)
+            {
+                prime[j] = 1;
+            }
+        }
+    }
+    s--;
+    return;
+}
+
+bool IS_PRIME(int a)
+{
+    int j = 0, p = a;
+    for(j=0; j<s and a>sob[j]; j++)
+    {
+        if(a%sob[j]==0)
+            return false;
+    }
+    return true;
+}
+int main()
+{
+    SEIEVE();
+    cout<<s<<endl;
+    for(int i = 1; i<10; i++)
+    {
+        cout<<i<<"  "<<IS_PRIME(i)<<endl;
+    }
+    cout<<"not prime   === "<<"  "<<IS_PRIME(1000004249)<<endl;
+    return 0;
+
+}
