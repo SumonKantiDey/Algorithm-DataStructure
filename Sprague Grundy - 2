@@ -1,0 +1,58 @@
+///http://shakilcompetitiveprogramming.blogspot.com/search/label/Game%20theory
+///http://www.shafaetsplanet.com/planetcoding/?p=2714
+///prob https://www.codechef.com/problems/EXPGAME
+///(2 no kha)
+#include<bits/stdc++.h>
+using namespace std;
+const int MX = 1000005 ;
+int grundy[MX] , rev[6] = { 1 , 4 , 27, 256, 3125, 46656} ; // in a single move n*n can be removed
+int grundyNumber(int x)
+{
+    if( x == 0 ) return 0 ; // base case , grunday is always zero
+    if( grundy[x] != -1 ) return grundy[x];
+    set <int> s ;
+    int i ;
+    for (i = 0 ;  i < 6 ; i++ )
+    {
+        if( x - rev[i] >= 0 )
+        s.insert(grundyNumber(x-(rev[i])));
+    }
+    cout << "X : " << x << endl;
+    cout << "set present value : ";
+    for(auto y : s)
+    {
+        cout << y <<" ";
+    }
+    cout << endl;
+    int ans = 0 ;
+    while(s.find(ans) != s.end()) ans++;
+    cout <<"Not pres in set : " << ans << "\n\n";
+      return grundy[x] = ans ;
+}
+int main()
+{
+    memset(grundy,-1,sizeof(grundy));
+    int cs , t ;
+    scanf("%d",&t);
+    for ( cs = 1 ; cs <= t ; cs++ )
+    {
+        int n , ans = 0 , x ;
+        scanf("%d",&n);
+        for (int i = 0 ; i < n ; i++ )
+        {
+            scanf("%d",&x);
+            ans ^= grundyNumber(x);
+        }
+        if( ans ) puts("Little Chef"); // first mover win
+        else puts("Head Chef");
+    }
+
+    return 0;
+}
+/**
+input :
+1//test case
+2 //piles
+6 8
+**/
+
