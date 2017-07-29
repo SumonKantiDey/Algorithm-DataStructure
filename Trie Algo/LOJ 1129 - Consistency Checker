@@ -1,0 +1,70 @@
+//lightoj.com/volume_showproblem.php?problem=1129
+#include<bits//stdc++.h>
+using namespace std;
+string s[10002];
+struct node{
+    bool endmark;
+    node *next[10];
+    node()
+    {
+        endmark = false;
+        for(int i = 0; i < 10; i++)
+            next[i] = NULL;
+    }
+} *root;
+bool flag;
+void insert(string str,int len)
+{
+    node *curr = root;
+    int cnt = 0;
+    for(int i = 0; i < len; i++){
+        int id = str[i] - '0';
+        if(curr->next[id] == NULL){
+           curr->next[id] = new node();
+        }
+        curr = curr->next[id];
+        if(curr->endmark == true) flag = true;
+    }
+    curr->endmark = true;
+}
+
+void del(node* cur)
+{
+    for(int i = 0; i < 10; i++){
+        if(cur->next[i]){
+           del(cur->next[i]);
+        }
+    }
+    delete(cur);
+}
+int main()
+{
+    int t,cs = 0;
+    cin >> t;
+    while(t--){
+        root = new node();
+        int n;
+        flag = false;
+        cin >> n;
+
+        for(int i = 0; i < n; i++){
+            char str[10];
+            scanf("%s",str);
+            s[i] = str;
+        }
+
+        sort(s,s+n);
+
+        for(int i = 0; i < n ; i++){
+            insert(s[i], s[i].size());
+        }
+        cout << "Case " << ++cs << ": ";
+
+        if(flag) puts("NO");
+
+        else puts("YES");
+        del(root);
+    }
+    return 0;
+}
+
