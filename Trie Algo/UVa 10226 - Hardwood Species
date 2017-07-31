@@ -1,0 +1,32 @@
+//uva 10226 - Hardwood Species
+#include<bits//stdc++.h>
+using namespace std;
+map<string,int>mp;
+map<string,int>::iterator it;
+char tree[35];
+int main()
+{
+    int t;
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
+    cin >> t;
+    gets(tree);// \n
+    gets(tree);//empty line
+    while(t--){
+        int total_tree = 0;
+        while(gets(tree))
+        {
+            if(strlen(tree) == 0) break;
+            total_tree++;
+            mp[tree]++;
+        }
+        for(it = mp.begin(); it != mp.end(); it++){
+            cout << it->first;
+            printf(" %.4f\n",(double)it->second * 100/total_tree);
+        }
+        mp.clear();
+        if(t) cout << "\n";
+    }
+    return 0;
+
+}
