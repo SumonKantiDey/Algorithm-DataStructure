@@ -1,0 +1,61 @@
+//http://www.lightoj.com/volume_showproblem.php?problem=1114
+#include<bits/stdc++.h>
+using namespace std;
+map<string,int>mp;
+vector<string>res;
+
+char wrd[105],sen[100005];
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    for(int cs = 1; cs <= t; cs++)
+    {
+        mp.clear();
+        int n,l;
+        scanf("%d",&n);
+        while(n--){
+            scanf("%s",wrd);
+            if(strlen(wrd) > 3)sort(wrd + 1,wrd + strlen(wrd) -1);
+            mp[wrd]++;
+        }
+
+        printf("Case %d:\n",cs);
+        scanf("%d",&l);
+
+        getchar();
+
+        while(l--)
+        {
+            int k = 0,cnt = 0;
+            gets(sen);
+            
+            stringstream ss;
+            ss<<sen;
+            
+            while(ss>>sen)
+            {
+                res.push_back(sen);
+            }
+
+            int ans = 1,f = 0;
+
+            for(int i = 0; i < res.size(); i++)
+            {
+                if(res[i].size() > 3) sort(res[i].begin() + 1,res[i].end()-1);
+
+                if(mp[res[i]] == 0){
+                    f = 1;
+                    break;
+                }
+                else ans *= mp[res[i]];
+            }
+
+            if(f) printf("0\n");
+            else  printf("%d\n",ans);
+            res.clear();
+        }
+    }
+    return 0;
+}
+
