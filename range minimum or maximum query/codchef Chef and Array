@@ -1,0 +1,64 @@
+//https://www.codechef.com/problems/FRMQ
+#include<bits/stdc++.h>
+using namespace std;
+#define Max 100105
+int ST[17][Max];
+int A[Max];
+int lg[Max];
+void Compute_ST(int N)
+{
+    for (int i=0;i<N;i++)ST[0][i] = A[i];
+    for (int k = 1;k <= lg[N]; k++)
+    {
+        for (int i=0;i+(1<<k)<=N;i++)
+        {
+            int x = ST[k-1][i];
+            int y = ST[k-1][i+(1<<k-1)];
+            ST[k][i] = max(x,y);
+        }
+    }
+}
+
+int RMQ(int i, int j)
+{
+    int k = lg[j - i + 1];
+    int x = ST[k][i];
+    int y = ST[k][j-(1<<k)+1];
+    return max(x,y);
+}
+
+int main()
+{
+    int N;
+    scanf("%d",&N);
+    for(int i=0;i<N;i++)
+    {
+        cin >> A[i];
+    }
+    for(int i = 2; i <= N; i++){
+        lg[i] = lg[i >> 1] + 1;
+    }
+    Compute_ST(N);
+
+    int Q,x1,y1,x2,y2;
+    long long ans = 0;
+    scanf("%d%d%d",&Q,&x1,&y1);
+    ans += RMQ(min(x1,y1),max(x1,y1));
+    
+    for(int i = 2; i <= Q; i++)
+    {
+        x1 += 7;
+        while(x1 >= N-1) x1 -= (N-1);
+
+        y1 += 11;
+        while(y1>=N) y1 -= N;
+
+        if(x1 <= y1)
+            ans += RMQ(x1, y1);
+        else
+            ans += RMQ(y1, x1);
+    }
+    printf("%lld\n",ans);
+    return 0;
+}
+
