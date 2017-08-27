@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int MX = 200005;
+int n;
+int BIT[MX], arr[MX],tmp[MX];
+
+void update(int x, int val)//get next node
+{
+    while(x <= n){
+        BIT[x] += val;
+        x += x & (-x);
+      }
+}
+
+ll query_sum(int x)//get pnarent node
+{
+    ll sum = 0;
+    while(x > 0){
+        sum += BIT[x];
+        x -= x & (-x);
+    }
+    return sum;
+}
+int binary(int val)
+{
+    int low = 1,high = n;
+    while(low <= high){
+        int mid = (low + high)/2;
+        if(tmp[mid] == val) return mid;
+        if(tmp[mid] > val) high = mid - 1;
+        else low = mid + 1;
+    }
+}
+int main()
+{
+    int T;
+    cin >> T;
+    for(int cs = 1; cs <= T; cs++){
+        cin >> n;
+        for(int i = 1; i <= n; i++) BIT[i] = 0;
+        for(int i = 1; i <= n; i++){
+            cin >> arr[i];
+            tmp[i] = arr[i];
+        }
+        sort(tmp+1,tmp+1+n);
+        ll sum = 0;
+        for(int i = 1; i <= n; i++){
+            int pos = binary(arr[i]);
+            sum += (query_sum(n) - query_sum(pos));
+            update(pos,1);
+        }
+        printf("%lld\n",sum);
+    }
+     return 0;
+}
+
