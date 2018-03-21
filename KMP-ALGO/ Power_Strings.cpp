@@ -1,4 +1,4 @@
-//10298 - Power Strings
+//UVA 10298 Power Strings
 #include<bits/stdc++.h>
 using namespace std;
 #define mx 1000005
