@@ -1,4 +1,3 @@
-//10679 - I Love Strings!!
 #include<bits/stdc++.h>
 using namespace std;
 #define mx 100005
